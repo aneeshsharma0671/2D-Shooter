@@ -44,14 +44,14 @@ public class PlayerMovement : MonoBehaviour
 	float playerHeight;						//Height of the player
 
 	float originalXScale;					//Original scale on X axis
-	int direction = 1;						//Direction player is facing
+	public int direction = 1;			    //Direction player is facing
 
 	Vector2 colliderStandSize;				//Size of the standing collider
 	Vector2 colliderStandOffset;			//Offset of the standing collider
 	Vector2 colliderCrouchSize;				//Size of the crouching collider
 	Vector2 colliderCrouchOffset;			//Offset of the crouching collider
 
-	const float smallAmount = .05f;			//A small amount used for hanging position
+	const float smallAmount = .05f;         //A small amount used for hanging position
 
 
 	void Start ()
