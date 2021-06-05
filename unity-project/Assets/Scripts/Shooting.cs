@@ -19,42 +19,42 @@ public class Shooting : MonoBehaviour
     public float starttimeBtwShoots;
 
     void Update()
-    {
-            Vector3 scale = new Vector3(1, 1, 1);
-            transform.localScale = scale;
-            Vector3 difference;
+    {   
+        Vector3 scale = new Vector3(1, 1, 1);
+        transform.localScale = scale;
+        Vector3 difference;
 
-            // Weopon rotation
-            if(player.direction == 1)
-            {
-             difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-            }
-            else
-            {
+        // Weopon rotation
+        if(player.direction == 1)
+        {
+            difference = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        }
+        else
+        {
             difference = -Camera.main.ScreenToWorldPoint(Input.mousePosition) + transform.position;
-            }
+        }
 
-            float rotz = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
+        float rotz = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-            if (-90 <= rotz && rotz <= 90)
-            {
-                transform.rotation = Quaternion.Euler(0f, 0f, rotz + offset);
-            }
+        if (-90 <= rotz && rotz <= 90)
+        {
+            transform.rotation = Quaternion.Euler(0f, 0f, rotz + offset);
+        }
 
-            Quaternion bullet_rotation = transform.rotation;
+        Quaternion bullet_rotation = transform.rotation;
             
-            if(player.direction != 1)
-            {
-            if (-90 <= rotz && rotz <= 90)
-            {
-                bullet_rotation = Quaternion.Euler(0f, 0f, rotz + 180 + offset);
-            }
+        if(player.direction != 1)
+        {
+        if (-90 <= rotz && rotz <= 90)
+        {
+           bullet_rotation = Quaternion.Euler(0f, 0f, rotz + 180 + offset);
+        }
             
-            }
+        }
             
-            if (timeBtwShoots <= 0)
-            {
-                if (Input.GetMouseButtonDown(0))
+        if (timeBtwShoots <= 0)
+        {
+            if (Input.GetMouseButtonDown(0))
                 {
                     
                     Instantiate(projectile, shoot_point.position, bullet_rotation);
@@ -65,6 +65,6 @@ public class Shooting : MonoBehaviour
             {
                 starttimeBtwShoots -= Time.deltaTime;
             }
-    }
+        }
 
 }
