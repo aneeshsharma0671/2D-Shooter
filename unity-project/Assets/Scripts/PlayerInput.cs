@@ -2,7 +2,9 @@
 // inputs so swapping between mobile and standalone is simpler and 2) keeping inputs
 // from Update() in sync with FixedUpdate()
 
+
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 //We first ensure this script runs before all other player scripts to prevent laggy
 //inputs
@@ -12,14 +14,25 @@ public class PlayerInput : MonoBehaviour
 	public bool testTouchControlsInEditor = false;	//Should touch controls be tested?
 	public float verticalDPadThreshold = .5f;		//Threshold touch pad inputs
 	public Thumbstick thumbstick;					//Reference to Thumbstick
-	public TouchButton jumpButton;					//Reference to jump TouchButton
+	public TouchButton jumpButton;                  //Reference to jump TouchButton
+
+	bool movebuttonspressed;
+	bool jumpbuttonPressed;
+	bool jumpbuttonHeld;
+	bool crouchbuttonPressed;
+	bool crouchbuttonHeld;
+	public bool firebuttonPressed;
+
+	float horizontalInputRaw = 0f;
 
 	[HideInInspector] public float horizontal;		//Float that stores horizontal input
 	[HideInInspector] public bool jumpHeld;			//Bool that stores jump pressed
 	[HideInInspector] public bool jumpPressed;		//Bool that stores jump held
 	[HideInInspector] public bool crouchHeld;		//Bool that stores crouch pressed
-	[HideInInspector] public bool crouchPressed;	//Bool that stores crouch held
-	
+	[HideInInspector] public bool crouchPressed;    //Bool that stores crouch held
+	[HideInInspector] public bool firePressed;
+	[HideInInspector] public Vector2 mousePosition;
+
 	bool dPadCrouchPrev;							//Previous values of touch Thumbstick
 	bool readyToClear;								//Bool used to keep input in sync
 
@@ -33,13 +46,16 @@ public class PlayerInput : MonoBehaviour
 		if (GameManager.IsGameOver())
 			return;
 
+
 		//Process keyboard, mouse, gamepad (etc) inputs
 		ProcessInputs();
 		//Process mobile (touch) inputs
-		ProcessTouchInputs();
+		//	ProcessTouchInputs();
 
 		//Clamp the horizontal input to be between -1 and 1
+		jumpbuttonPressed = false;
 		horizontal = Mathf.Clamp(horizontal, -1f, 1f);
+		//Debug.Log(horizontal);
 	}
 
 	void FixedUpdate()
@@ -61,6 +77,7 @@ public class PlayerInput : MonoBehaviour
 		jumpHeld		= false;
 		crouchPressed	= false;
 		crouchHeld		= false;
+		firePressed     = false;
 
 		readyToClear	= false;
 	}
@@ -68,14 +85,19 @@ public class PlayerInput : MonoBehaviour
 	void ProcessInputs()
 	{
 		//Accumulate horizontal axis input
-		horizontal		+= Input.GetAxis("Horizontal");
-
+		if(movebuttonspressed)
+        {
+			horizontal += horizontalInputRaw;
+			
+		}
+		
+	
 		//Accumulate button inputs
-		jumpPressed		= jumpPressed || Input.GetButtonDown("Jump");
-		jumpHeld		= jumpHeld || Input.GetButton("Jump");
-
-		crouchPressed	= crouchPressed || Input.GetButtonDown("Crouch");
-		crouchHeld		= crouchHeld || Input.GetButton("Crouch");
+		jumpPressed		= jumpPressed || jumpbuttonPressed;
+		jumpHeld		= jumpHeld || jumpbuttonHeld;
+		crouchPressed	= crouchPressed || crouchbuttonPressed;
+		crouchHeld		= crouchHeld || crouchbuttonHeld;
+		firePressed     = firePressed || firebuttonPressed;
 	}
 
 	void ProcessTouchInputs()
@@ -103,4 +125,86 @@ public class PlayerInput : MonoBehaviour
 		//if button is pressed for first time or held
 		dPadCrouchPrev	= dPadCrouch;
 	}
+
+
+	public void horizontalInput(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			movebuttonspressed = true;
+		}
+		if (context.performed)
+        {
+			horizontalInputRaw = context.ReadValue<Vector2>().x;
+			Debug.Log(horizontalInputRaw);
+		}
+		if (context.canceled)
+		{
+			movebuttonspressed = false;
+		}
+	}
+
+	public void JumpInput(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			jumpbuttonPressed = true;
+		}
+		if (context.performed)
+        {
+			jumpbuttonPressed = true;
+		}
+		if (context.canceled)
+		{
+			jumpbuttonPressed = false;
+			jumpbuttonHeld = false;
+		}
+		else
+        {
+			jumpbuttonHeld = true;
+        }
+	}
+
+	public void CrouchInput(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			crouchbuttonPressed = true;
+		}
+		if (context.performed)
+		{
+			crouchbuttonPressed = true;
+		}
+		if (context.canceled)
+		{
+			crouchbuttonPressed = false;
+			crouchbuttonHeld = false;
+		}
+		else
+		{
+			crouchbuttonHeld = true;
+		}
+	}
+
+	public void FireInput(InputAction.CallbackContext context)
+	{
+		if (context.started)
+		{
+			firebuttonPressed = true;
+		}
+		if (context.performed)
+		{
+			firebuttonPressed = true;
+		}
+		if (context.canceled)
+		{
+			firebuttonPressed = false;
+		}
+	}
+
+	public void LookInput(InputAction.CallbackContext context)
+    {
+		mousePosition = context.ReadValue<Vector2>();
+    }
+
 }

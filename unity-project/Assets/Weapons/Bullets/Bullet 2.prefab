@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7220133583573571511}
   - component: {fileID: 6717184299867110442}
   - component: {fileID: 8473247258460700344}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Bullet 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6717184300771511541}
   - component: {fileID: 6717184300771511538}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Capsule
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5260793853017140243}
   - component: {fileID: 4610472948322116968}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Trail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
