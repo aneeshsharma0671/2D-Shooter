@@ -15,13 +15,14 @@ public class PlayerInput : MonoBehaviour
 	public float verticalDPadThreshold = .5f;		//Threshold touch pad inputs
 	public Thumbstick thumbstick;					//Reference to Thumbstick
 	public TouchButton jumpButton;                  //Reference to jump TouchButton
+	public float horizontalDpadthreshold = .98f;
 
 	bool movebuttonspressed;
 	bool jumpbuttonPressed;
 	bool jumpbuttonHeld;
 	bool crouchbuttonPressed;
 	bool crouchbuttonHeld;
-	public bool firebuttonPressed;
+	bool firebuttonPressed;
 
 	float horizontalInputRaw = 0f;
 
@@ -135,8 +136,8 @@ public class PlayerInput : MonoBehaviour
 		}
 		if (context.performed)
         {
-			horizontalInputRaw = context.ReadValue<Vector2>().x;
-			Debug.Log(horizontalInputRaw);
+				horizontalInputRaw = context.ReadValue<Vector2>().x;
+				//Debug.Log(horizontalInputRaw);
 		}
 		if (context.canceled)
 		{
@@ -186,6 +187,7 @@ public class PlayerInput : MonoBehaviour
 		}
 	}
 
+	/*
 	public void FireInput(InputAction.CallbackContext context)
 	{
 		if (context.started)
@@ -201,10 +203,27 @@ public class PlayerInput : MonoBehaviour
 			firebuttonPressed = false;
 		}
 	}
+	*/
 
 	public void LookInput(InputAction.CallbackContext context)
     {
+		// for mouse controls add logic here
 		mousePosition = context.ReadValue<Vector2>();
-    }
+
+		Debug.Log(mousePosition.magnitude);
+
+		if (context.started && mousePosition.magnitude >= horizontalDpadthreshold)
+		{
+			firebuttonPressed = true;
+		}
+		if (context.performed && mousePosition.magnitude >= horizontalDpadthreshold)
+		{
+			firebuttonPressed = true;
+		}
+		if (context.canceled)
+		{
+			firebuttonPressed = false;
+		}
+	}
 
 }

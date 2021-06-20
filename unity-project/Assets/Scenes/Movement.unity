@@ -1894,7 +1894,7 @@ MonoBehaviour:
   verticalDPadThreshold: 0.5
   thumbstick: {fileID: 0}
   jumpButton: {fileID: 0}
-  firebuttonPressed: 0
+  horizontalDpadthreshold: 0
   horizontal: 0
   jumpHeld: 0
   jumpPressed: 0
@@ -1956,7 +1956,7 @@ MonoBehaviour:
   zmax: 90
   player: {fileID: 1168827719}
   weapon_slot: {fileID: 1430435185}
-  starttimeBtwShoots: 1
+  starttimeBtwShoots: 0.1
 --- !u!114 &1168827721
 MonoBehaviour:
   m_ObjectHideFlags: 0

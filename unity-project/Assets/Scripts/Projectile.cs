@@ -9,6 +9,7 @@ public class Projectile : MonoBehaviour
     private Rigidbody2D rb;
     public LayerMask playerlayer;
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.layer != 9)

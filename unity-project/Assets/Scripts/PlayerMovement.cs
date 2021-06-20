@@ -155,8 +155,8 @@ public class PlayerMovement : MonoBehaviour
 		float xVelocity = speed * input.horizontal;
 
 		//If the sign of the velocity and direction don't match, flip the character
-		if (xVelocity * direction < 0f)
-			FlipCharacterDirection();
+	//	if (xVelocity * direction < 0f)
+	//		FlipCharacterDirection();
 
 		//If the player is crouching, reduce the velocity
 		if (isCrouching)
@@ -240,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
 			rigidBody.velocity = new Vector2(rigidBody.velocity.x, maxFallSpeed);
 	}
 
-	void FlipCharacterDirection()
+	public void FlipCharacterDirection()
 	{
 		//Turn the character by flipping the direction
 		direction *= -1;

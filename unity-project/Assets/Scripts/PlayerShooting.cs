@@ -40,15 +40,15 @@ public class PlayerShooting : MonoBehaviour
 
     void setrotation()
     {
-        Vector3 difference;
+        Vector2 difference;
         // Weopon rotation
         if (player.direction == 1)
         {
-            difference = Camera.main.ScreenToWorldPoint(input.mousePosition) - weapon_slot.position;
+            difference = input.mousePosition;
         }
         else
         {
-            difference = -Camera.main.ScreenToWorldPoint(input.mousePosition) + weapon_slot.position;
+            difference = new Vector2(0f,0f) - input.mousePosition;
         }
 
         float rotz = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
@@ -56,6 +56,10 @@ public class PlayerShooting : MonoBehaviour
         if (-90 <= rotz && rotz <= 90)
         {
             weapon_slot.rotation = Quaternion.Euler(0f, 0f, rotz + offset);
+        }
+        else
+        {
+            player.FlipCharacterDirection();
         }
 
         //bullet rotation
@@ -74,11 +78,17 @@ public class PlayerShooting : MonoBehaviour
     {
         if (timeBtwShoots <= 0)
         {
-            Debug.Log("time");
+           // Debug.Log("time");
             if (input.firePressed)
             {
-                Debug.Log("fire");
+              //  Debug.Log("fire");
+                
+
                 Instantiate(projectile,position,rotation);
+                rotation *= Quaternion.Euler(0f, 0f, 15f);
+                Instantiate(projectile,position,rotation);
+                rotation *= Quaternion.Euler(0f, 0f, -30f);
+                Instantiate(projectile, position, rotation);
                 timeBtwShoots = starttimeBtwShoots;
             }
         }
