@@ -56,7 +56,7 @@ public class PlayerAnimations : MonoBehaviour
 		anim.SetFloat(fallParamID, rigidBody.velocity.y);
 
 		//Use the absolute value of speed so that we only pass in positive numbers
-		anim.SetFloat(speedParamID, Mathf.Abs(input.horizontal));
+		anim.SetFloat(speedParamID, input.horizontal*movement.direction);
 	}
 
 	//This method is called from events in the animation itself. This keeps the footstep
