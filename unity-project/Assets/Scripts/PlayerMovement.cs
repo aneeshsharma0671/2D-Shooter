@@ -20,7 +20,8 @@ public class PlayerMovement : MonoBehaviour
 	public float jumpHoldDuration = .1f;	//How long the jump key can be held
 
 	[Header("Environment Check Properties")]
-	public float footOffset = .4f;			//X Offset of feet raycast
+	public float footOffset = .4f;          //X Offset of feet raycast
+	public float grabHeight = 1.7f;
 	public float eyeHeight = 1.5f;			//Height of wall checks
 	public float reachOffset = .7f;			//X offset for wall grabbing
 	public float headClearance = .5f;		//Space needed above the player's head
@@ -37,7 +38,8 @@ public class PlayerMovement : MonoBehaviour
 
 	PlayerInput input;						//The current inputs for the player
 	BoxCollider2D bodyCollider;				//The collider component
-	Rigidbody2D rigidBody;					//The rigidbody component
+	Rigidbody2D rigidBody;                  //The rigidbody component
+	PlayerWeaponManager weaponManager;
 	
 	float jumpTime;							//Variable to hold jump duration
 	float coyoteTime;						//Variable to hold coyote duration
@@ -60,6 +62,7 @@ public class PlayerMovement : MonoBehaviour
 		input = GetComponent<PlayerInput>();
 		rigidBody = GetComponent<Rigidbody2D>();
 		bodyCollider = GetComponent<BoxCollider2D>();
+		weaponManager = GetComponent<PlayerWeaponManager>();
 
 		//Record the original x scale of the player
 		originalXScale = transform.localScale.x;
@@ -111,8 +114,8 @@ public class PlayerMovement : MonoBehaviour
 		Vector2 grabDir = new Vector2(direction, 0f);
 
 		//Cast three rays to look for a wall grab
-		RaycastHit2D blockedCheck = Raycast(new Vector2(footOffset * direction, playerHeight), grabDir, grabDistance);
-		RaycastHit2D ledgeCheck = Raycast(new Vector2(reachOffset * direction, playerHeight), Vector2.down, grabDistance);
+		RaycastHit2D blockedCheck = Raycast(new Vector2(footOffset * direction, grabHeight), grabDir, grabDistance);
+		RaycastHit2D ledgeCheck = Raycast(new Vector2(reachOffset * direction, grabHeight), Vector2.down, grabDistance);
 		RaycastHit2D wallCheck = Raycast(new Vector2(footOffset * direction, eyeHeight), grabDir, grabDistance);
 
 		//If the player is off the ground AND is not hanging AND is falling AND
@@ -130,8 +133,13 @@ public class PlayerMovement : MonoBehaviour
 			transform.position = pos;
 			//...set the rigidbody to static...
 			rigidBody.bodyType = RigidbodyType2D.Static;
+
+			//...set weaponManager off
+			weaponManager.DisableShooting();
+
 			//...finally, set isHanging to true
 			isHanging = true;
+			                                                          
 		}
 	}
 
@@ -182,6 +190,8 @@ public class PlayerMovement : MonoBehaviour
 				isHanging = false;
 				//...set the rigidbody to dynamic and exit
 				rigidBody.bodyType = RigidbodyType2D.Dynamic;
+				//...set shooting on
+				weaponManager.EnableShooting();
 				return;
 			}
 
@@ -192,6 +202,9 @@ public class PlayerMovement : MonoBehaviour
 				isHanging = false;
 				//...set the rigidbody to dynamic and apply a jump force...
 				rigidBody.bodyType = RigidbodyType2D.Dynamic;
+				//... set shooting on
+				weaponManager.EnableShooting();
+
 				rigidBody.AddForce(new Vector2(0f, hangingJumpForce), ForceMode2D.Impulse);
 				//...and exit
 				return;
@@ -309,4 +322,6 @@ public class PlayerMovement : MonoBehaviour
 		//Return the results of the raycast
 		return hit;
 	}
+
+
 }
