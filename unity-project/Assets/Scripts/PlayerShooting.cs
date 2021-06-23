@@ -8,6 +8,7 @@ public class PlayerShooting : MonoBehaviour
     public float zmin = -90f;
     public float zmax = 90f;
 
+    public GameObject headBone;
     
 
     private GameObject projectile;
@@ -30,6 +31,7 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         setrotation();
+        setHeadRotation();
         if(shoot_point == null)
         {
             shoot_point = weapon_slot.GetComponentInChildren<Weapon>().shoot_point;
@@ -37,6 +39,21 @@ public class PlayerShooting : MonoBehaviour
         }
         shoot(projectile, shoot_point.position, bullet_rotation);
     }
+
+    void setHeadRotation()
+    {
+        headBone.transform.rotation = weapon_slot.rotation;
+        if (player.direction == 1)
+        {
+            headBone.transform.rotation *= Quaternion.Euler(0f, 0f, 90f);
+        }
+        else
+        {
+            headBone.transform.rotation *= Quaternion.Euler(0f, 0f, -90f);
+        }
+
+    }
+
 
     void setrotation()
     {
