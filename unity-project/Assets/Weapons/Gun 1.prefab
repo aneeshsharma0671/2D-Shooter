@@ -1,5 +1,65 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &48433895451096001
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1474729674262083608}
+  m_Layer: 0
+  m_Name: LeftHandPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1474729674262083608
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 48433895451096001}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.198, y: 0.007, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5826753587899962851}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4753952843886024661
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6742698526123107288}
+  m_Layer: 0
+  m_Name: RightHandPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6742698526123107288
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753952843886024661}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.219, y: -0.027, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5826753587899962851}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5826753587899962850
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,6 +90,8 @@ Transform:
   m_Children:
   - {fileID: 8044008157560749646}
   - {fileID: 5826753588088817600}
+  - {fileID: 1474729674262083608}
+  - {fileID: 6742698526123107288}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -45,9 +107,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a90adc82cf862d429cefd1684bb33e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Weaponindex: 1
+  Weaponindex: 0
   shoot_point: {fileID: 5826753588088817600}
-  bulletprefab: {fileID: 6717184299867110445, guid: e93d900f10f33534d84452848f205a0f, type: 3}
+  bulletprefab: {fileID: 6717184299867110445, guid: 1837112c542ca2342a64f97bb6f6e57c, type: 3}
+  leftHandpos: {fileID: 1474729674262083608}
+  rightHandpos: {fileID: 6742698526123107288}
 --- !u!1 &5826753588088817599
 GameObject:
   m_ObjectHideFlags: 0
@@ -150,7 +214,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 33bb11c7a85b61742b956641caa9f51d, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.1078887, a: 1}
+  m_Color: {r: 0.10708821, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

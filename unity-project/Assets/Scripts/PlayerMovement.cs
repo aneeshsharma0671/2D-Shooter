@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
 	public bool isHanging;					//Is player hanging?
 	public bool isCrouching;				//Is player crouching?
 	public bool isHeadBlocked;
+	public bool isfiring;
 
 	PlayerInput input;						//The current inputs for the player
 	BoxCollider2D bodyCollider;				//The collider component
@@ -150,7 +151,7 @@ public class PlayerMovement : MonoBehaviour
 			return;
 
 		//Handle crouching input. If holding the crouch button but not crouching, crouch
-		if (input.crouchHeld && !isCrouching && !isJumping)
+		if (input.crouchHeld && !isCrouching && !isJumping && isOnGround)
 			Crouch();
 		//Otherwise, if not holding crouch but currently crouching, stand up
 		else if (!input.crouchHeld && isCrouching)
@@ -163,8 +164,8 @@ public class PlayerMovement : MonoBehaviour
 		float xVelocity = speed * input.horizontal;
 
 		//If the sign of the velocity and direction don't match, flip the character
-	//	if (xVelocity * direction < 0f)
-	//		FlipCharacterDirection();
+		if (xVelocity * direction < 0f && !input.firePressed)
+			FlipCharacterDirection();
 
 		//If the player is crouching, reduce the velocity
 		if (isCrouching)
@@ -273,6 +274,7 @@ public class PlayerMovement : MonoBehaviour
 		//The player is crouching
 		isCrouching = true;
 
+		weaponManager.setCrouchGunPosition();
 		//Apply the crouching collider size and offset
 		bodyCollider.size = colliderCrouchSize;
 		bodyCollider.offset = colliderCrouchOffset;
@@ -286,7 +288,9 @@ public class PlayerMovement : MonoBehaviour
 
 		//The player isn't crouching
 		isCrouching = false;
-	
+
+		weaponManager.setStandingGunPosition();
+
 		//Apply the standing collider size and offset
 		bodyCollider.size = colliderStandSize;
 		bodyCollider.offset = colliderStandOffset;

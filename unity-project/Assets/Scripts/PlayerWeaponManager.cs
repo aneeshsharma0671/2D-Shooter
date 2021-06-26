@@ -6,23 +6,33 @@ using UnityEngine;
 public class PlayerWeaponManager : MonoBehaviour
 {
     PlayerShooting shooting;
+    PlayerMovement movement;
 
     public List<GameObject> weapon_index;
-    public List<GameObject> weapon_inventory;
+  //  public List<GameObject> weapon_inventory;
     public GameObject weapon_slot;
     public int currentweaponindex = 0;
     public GameObject currentweapon;
 
     public Vector3 gunBackPosition;
+    public Vector3 gunCrouchPosition;
     public Quaternion gunBackRotation;
 
     public Vector3 gunPosition;
     public Quaternion gunRotation;
 
+    private void Awake()
+    {
+        updateweapon(GameInfo.weaponindex);
+    }
 
     private void Start()
     {
         shooting = GetComponent<PlayerShooting>();
+        movement = GetComponent<PlayerMovement>();
+
+      
+
     }
 
     public void EnableShooting()
@@ -38,6 +48,24 @@ public class PlayerWeaponManager : MonoBehaviour
         weapon_slot.transform.localPosition = gunBackPosition;
         weapon_slot.transform.localRotation = gunBackRotation;
     
+    }
+
+
+    public void setCrouchGunPosition()
+    {
+        weapon_slot.transform.localPosition = gunCrouchPosition;
+    }
+
+    public void setStandingGunPosition()
+    {
+        weapon_slot.transform.localPosition = gunPosition;
+    }
+
+
+    void updateweapon(int weaponIndex)
+    {
+     //   Destroy(weapon_slot.GetComponentInChildren<Weapon>().gameObject);
+        GameObject newweapon = Instantiate(weapon_index[weaponIndex], weapon_slot.transform);
     }
 
 
@@ -78,26 +106,8 @@ public class PlayerWeaponManager : MonoBehaviour
             tryswapWeapon();
         } 
     }
-
-
-    void tryswapWeapon()
-    {
-        if(currentweaponindex < (weapon_inventory.Count-1))
-        {
-            currentweaponindex++;
-        }
-        else
-        {
-            currentweaponindex = 0;
-        }
-        
-        updateweapon();
-    }
-
-    void updateweapon()
-    {
-        Destroy(weapon_slot.GetComponentInChildren<Weapon>().gameObject);
-        GameObject newweapon = Instantiate(weapon_inventory[currentweaponindex], weapon_slot.transform);
-    }
     */
+
+
+
 }

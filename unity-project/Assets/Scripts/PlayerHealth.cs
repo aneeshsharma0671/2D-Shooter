@@ -35,7 +35,7 @@ public class PlayerHealth : MonoBehaviour
 
 		//Tell the Game Manager that the player died and tell the Audio Manager to play
 		//the death audio
-		GameManager.PlayerDied();
+		//GameManager.PlayerDied();
 		AudioManager.PlayDeathAudio();
 	}
 }

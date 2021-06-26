@@ -8,6 +8,9 @@ public class Weapon : MonoBehaviour
     public Transform shoot_point;
     public GameObject bulletprefab;
 
+    public Transform leftHandpos;
+    public Transform rightHandpos;
+
     // Start is called before the first frame update
     void Start()
     {

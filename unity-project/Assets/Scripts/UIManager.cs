@@ -2,6 +2,7 @@
 // project. All HUD UI commands are issued through the static methods of this class
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class UIManager : MonoBehaviour
@@ -11,11 +12,7 @@ public class UIManager : MonoBehaviour
 	//scripts access this one through its public static methods
 	static UIManager current;
 
-	public TextMeshProUGUI orbText;			//Text element showing number of orbs
-	public TextMeshProUGUI timeText;		//Text element showing amount of time
-	public TextMeshProUGUI deathText;		//Text element showing number or deaths
-	public TextMeshProUGUI gameOverText;	//Text element showing the Game Over message
-
+	
 
 	void Awake()
 	{
@@ -32,47 +29,10 @@ public class UIManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public static void UpdateOrbUI(int orbCount)
-	{
-		//If there is no current UIManager, exit
-		if (current == null)
-			return;
-
-		//Update the text orb element
-		current.orbText.text = orbCount.ToString();
-	}
-
-	public static void UpdateTimeUI(float time)
-	{
-		//If there is no current UIManager, exit
-		if (current == null)
-			return;
-
-		//Take the time and convert it into the number of minutes and seconds
-		int minutes = (int)(time / 60);
-		float seconds = time % 60f;
-
-		//Create the string in the appropriate format for the time
-		current.timeText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
-	}
-
-	public static void UpdateDeathUI(int deathCount)
-	{
-		//If there is no current UIManager, exit
-		if (current == null)
-			return;
-
-		//update the player death count element
-		current.deathText.text = deathCount.ToString();
-	}
-
-	public static void DisplayGameOverText()
-	{
-		//If there is no current UIManager, exit
-		if (current == null)
-			return;
-
-		//Show the game over text
-		current.gameOverText.enabled = true;
-	}
+	public static void onPlay()
+    {
+		Debug.Log("play");
+		GameInfo.weaponindex = 0;
+		SceneManager.LoadScene(1);
+    }
 }
