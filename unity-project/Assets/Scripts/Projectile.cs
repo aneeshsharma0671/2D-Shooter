@@ -7,7 +7,6 @@ public class Projectile : MonoBehaviour
     public float speed;
     public float lifetime;
     private Rigidbody2D rb;
-    public LayerMask playerlayer;
 
 
     private void OnCollisionEnter2D(Collision2D collision)

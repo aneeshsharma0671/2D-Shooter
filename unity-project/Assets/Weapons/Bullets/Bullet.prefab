@@ -94,11 +94,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cfe6c9c36a10745ad1dfcb445eccdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 10
   lifetime: 2
-  playerlayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &6717184300771511540
 GameObject:
   m_ObjectHideFlags: 0
@@ -167,8 +164,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1132634077
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 798fafd1fd425654cbacf7d441b46712, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -250,10 +247,10 @@ TrailRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -1132634077
+  m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -283,7 +280,7 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 0.7246539, b: 0, a: 1}
+      key0: {r: 0, g: 0.64169765, b: 1, a: 1}
       key1: {r: 0.25609863, g: 0.9433962, b: 0.21715912, a: 0}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}

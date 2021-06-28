@@ -9,9 +9,11 @@ public class PlayerShooting : MonoBehaviour
     public float zmax = 90f;
 
     public GameObject headBone;
-    
+    public float headClamp;
+    public float gunClamp;
 
-    private GameObject projectile;
+    public WeaponInfoScriptableObject weaponInfo;
+    
     private Transform shoot_point;
     public PlayerMovement player;
     public Transform weapon_slot;
@@ -20,6 +22,7 @@ public class PlayerShooting : MonoBehaviour
 
     private float timeBtwShoots = 0f;
     public float starttimeBtwShoots = 0.1f;
+
 
     private Quaternion bullet_rotation;
 
@@ -31,18 +34,23 @@ public class PlayerShooting : MonoBehaviour
     void Update()
     {
         setrotation();
+        //if (-headClamp <= weapon_slot.rotation.z && weapon_slot.rotation.z <= headClamp)
         setHeadRotation();
+       
+            
         if(shoot_point == null)
         {
             shoot_point = weapon_slot.GetComponentInChildren<Weapon>().shoot_point;
-            projectile = weapon_slot.GetComponentInChildren<Weapon>().bulletprefab;
         }
-        shoot(projectile, shoot_point.position, bullet_rotation);
+        shoot(weaponInfo.weapons[GameInfo.weaponindex].bulletPrefab, shoot_point.position, bullet_rotation, weaponInfo.weapons[GameInfo.weaponindex].weaponType);
     }
 
     void setHeadRotation()
     {
-        headBone.transform.rotation = weapon_slot.rotation;
+       
+       headBone.transform.rotation = weapon_slot.rotation;
+        
+
         if (player.direction == 1)
         {
             headBone.transform.rotation *= Quaternion.Euler(0f, 0f, 90f);
@@ -51,7 +59,7 @@ public class PlayerShooting : MonoBehaviour
         {
             headBone.transform.rotation *= Quaternion.Euler(0f, 0f, -90f);
         }
-
+       
     }
 
 
@@ -70,7 +78,7 @@ public class PlayerShooting : MonoBehaviour
 
         float rotz = Mathf.Atan2(difference.y, difference.x) * Mathf.Rad2Deg;
 
-        if (-90 <= rotz && rotz <= 90)
+        if (-gunClamp <= rotz && rotz <= gunClamp)
         {
             weapon_slot.rotation = Quaternion.Euler(0f, 0f, rotz + offset);
         }
@@ -81,7 +89,8 @@ public class PlayerShooting : MonoBehaviour
 
         //bullet rotation
         bullet_rotation = weapon_slot.rotation;
-            
+        
+        
         if(player.direction != 1)
         {
         if (-90 <= rotz && rotz <= 90)
@@ -91,21 +100,32 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    void shoot(GameObject bullet_prefab,Vector3 position , Quaternion rotation)
+    void shoot(GameObject bullet_prefab,Vector3 position , Quaternion rotation ,weaponTypes weapondata)
     {
         if (timeBtwShoots <= 0)
         {
            // Debug.Log("time");
             if (input.firePressed)
             {
-              //  Debug.Log("fire");
-                
-
-                Instantiate(projectile,position,rotation);
-                rotation *= Quaternion.Euler(0f, 0f, 15f);
-                Instantiate(projectile,position,rotation);
-                rotation *= Quaternion.Euler(0f, 0f, -30f);
-                Instantiate(projectile, position, rotation);
+                //  Debug.Log("fire");
+                switch (weapondata)
+                {
+                    case weaponTypes.pistol:
+                        Instantiate(bullet_prefab, position, rotation);
+                        break;
+                    case weaponTypes.rifle:
+                        break;
+                    case weaponTypes.shotgun:
+                        Instantiate(bullet_prefab, position, rotation);
+                        rotation *= Quaternion.Euler(0f, 0f, 15f);
+                        Instantiate(bullet_prefab, position, rotation);
+                        rotation *= Quaternion.Euler(0f, 0f, -30f);
+                        Instantiate(bullet_prefab, position, rotation);
+                       
+                        break;
+                    default:
+                        break;
+                }
                 timeBtwShoots = starttimeBtwShoots;
             }
         }

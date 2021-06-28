@@ -96,9 +96,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 2
-  playerlayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!1 &6717184300771511540
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +168,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: -9095717837082945937, guid: 798fafd1fd425654cbacf7d441b46712, type: 3}
-  m_Color: {r: 0, g: 0.52267194, b: 1, a: 1}
+  m_Color: {r: 0.0021022558, g: 1, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -253,7 +250,7 @@ TrailRenderer:
   m_SortingLayerID: -1132634077
   m_SortingLayer: 3
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.05
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1

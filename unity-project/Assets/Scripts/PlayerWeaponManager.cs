@@ -1,14 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
 public class PlayerWeaponManager : MonoBehaviour
 {
     PlayerShooting shooting;
     PlayerMovement movement;
 
-    public List<GameObject> weapon_index;
+    public WeaponInfoScriptableObject weaponInfo;
   //  public List<GameObject> weapon_inventory;
     public GameObject weapon_slot;
     public int currentweaponindex = 0;
@@ -65,7 +63,7 @@ public class PlayerWeaponManager : MonoBehaviour
     void updateweapon(int weaponIndex)
     {
      //   Destroy(weapon_slot.GetComponentInChildren<Weapon>().gameObject);
-        GameObject newweapon = Instantiate(weapon_index[weaponIndex], weapon_slot.transform);
+        GameObject newweapon = Instantiate(weaponInfo.weapons[weaponIndex].weaponPrefab, weapon_slot.transform);
     }
 
 
