@@ -11,7 +11,6 @@ public class UIManager : MonoBehaviour
 	//one in existence. This is often referred to as a "singleton" design pattern. Other
 	//scripts access this one through its public static methods
 	static UIManager current;
-
 	
 
 	void Awake()
@@ -29,10 +28,24 @@ public class UIManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
-	public static void onPlay()
+    public static void onPlay()
     {
 		Debug.Log("play");
 		GameInfo.weaponindex = 0;
 		SceneManager.LoadScene(1);
     }
+
+	public void leanTweenMenuPanel(GameObject panelOut,GameObject panelIn,int direction, float speed)
+    {
+		if(direction < 0)
+        {
+			LeanTween.moveX(panelOut.GetComponent<RectTransform>(), -2000, speed);
+			LeanTween.moveX(panelIn.GetComponent<RectTransform>(), 0, speed);
+		}
+		else if(direction >= 0)
+        {
+			LeanTween.moveX(panelOut.GetComponent<RectTransform>(), 2000, speed);
+			LeanTween.moveX(panelIn.GetComponent<RectTransform>(), 0, speed);
+		}
+	}
 }

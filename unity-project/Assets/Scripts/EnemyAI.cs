@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+public enum batstate
+{
+    idle,
+    attack
+}
 
 public class EnemyAI : MonoBehaviour
 {
+    public batstate state;
     public Transform target;
-
+    int playerlayer;
     public float speed = 200f;
     public float nextWayPointDis = 3f;
-
+    public int maxColliders = 10;
+    public float chaseDistance;
     public Transform enemyGFX;
 
+    public bool isAttacking;
+
+ 
     Path path;
     int currentWayPoint = 0;
     bool reachedEndOfPath = false;
@@ -19,14 +29,18 @@ public class EnemyAI : MonoBehaviour
 
     Seeker seeker;
     Rigidbody2D rb;
+    Transform player;
+  
 
     private void Start()
     {
         seeker = GetComponent<Seeker>();
         rb = GetComponent<Rigidbody2D>();
-
+        player = FindObjectOfType<PlayerMovement>().gameObject.transform;
+    
         InvokeRepeating("UpdatePath", 0f, 0.5f);
        
+
     }
     
     void UpdatePath()
@@ -34,6 +48,8 @@ public class EnemyAI : MonoBehaviour
         if(seeker.IsDone())
             seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
+
+   
 
     void OnPathComplete(Path p)
     {
@@ -46,9 +62,48 @@ public class EnemyAI : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(path == null)
+     
+
+        switch (state)
+        {
+            case batstate.idle:
+                break;
+            case batstate.attack:
+                chaseTarget();
+                break;
+            default:
+                break;
+        }
+        
+    }
+
+    private void Update()
+    {
+        surroundCheck();
+        isAttacking = reachedEndOfPath;
+        enemyGFX.localScale = new Vector3(enemyDirection, 1f, 1f);
+    }
+
+ 
+
+    void surroundCheck()
+    {
+        float distancefromPlayer = Vector2.Distance(player.position, transform.position);
+        if(distancefromPlayer < chaseDistance)
+        {
+            state = batstate.attack;
+        }
+        else
+        {
+            state = batstate.idle;
+        }
+    }
+
+    void chaseTarget()
+    {
+        if (path == null)
             return;
-        if(currentWayPoint >= path.vectorPath.Count)
+        if (currentWayPoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
             return;
@@ -65,12 +120,12 @@ public class EnemyAI : MonoBehaviour
 
         float distance = Vector2.Distance(rb.position, path.vectorPath[currentWayPoint]);
 
-        if(distance < nextWayPointDis)
+        if (distance < nextWayPointDis)
         {
             currentWayPoint++;
         }
 
-        if (target.position.x-rb.position.x > 0f)
+        if (target.position.x - rb.position.x > 0f)
         {
             enemyDirection = 1;
         }
@@ -78,15 +133,9 @@ public class EnemyAI : MonoBehaviour
         {
             enemyDirection = -1;
         }
-
-       
-        Debug.Log(enemyDirection);
     }
 
-    private void Update()
-    {
-        enemyGFX.localScale = new Vector3(enemyDirection, 1f, 1f);
-    }
+  
 
     void UpdateGFX(int direction)
     {
@@ -98,6 +147,12 @@ public class EnemyAI : MonoBehaviour
         {
             enemyGFX.localScale = new Vector3(-1f, 1f, 1f);
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, chaseDistance);
     }
 
 }
