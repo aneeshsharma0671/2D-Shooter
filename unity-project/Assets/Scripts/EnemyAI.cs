@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour
     public float nextWayPointDis = 3f;
     public int maxColliders = 10;
     public float chaseDistance;
+    public float attackDistance;
     public Transform enemyGFX;
 
     public bool isAttacking;
@@ -80,7 +81,6 @@ public class EnemyAI : MonoBehaviour
     private void Update()
     {
         surroundCheck();
-        isAttacking = reachedEndOfPath;
         enemyGFX.localScale = new Vector3(enemyDirection, 1f, 1f);
     }
 
@@ -97,6 +97,16 @@ public class EnemyAI : MonoBehaviour
         {
             state = batstate.idle;
         }
+        float distanceforAttack = Vector2.Distance(player.position, transform.position);
+        if(distanceforAttack < attackDistance)
+        {
+            isAttacking = true;
+        }
+        else
+        {
+            isAttacking = false;
+        }
+
     }
 
     void chaseTarget()
@@ -153,6 +163,8 @@ public class EnemyAI : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, chaseDistance);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackDistance);
     }
 
 }

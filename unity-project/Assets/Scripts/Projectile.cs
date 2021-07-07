@@ -6,6 +6,7 @@ public class Projectile : MonoBehaviour
 {
     public float speed;
     public float lifetime;
+    public int projectileDamage;
     private Rigidbody2D rb;
 
 
@@ -13,8 +14,13 @@ public class Projectile : MonoBehaviour
     {
         if(collision.gameObject.layer != 9)
         {
+            if(collision.gameObject.GetComponentInParent<EnemyLifeBehaviour>() != null)
+            {
+                collision.gameObject.GetComponentInParent<EnemyLifeBehaviour>().TakeDamage(projectileDamage);
+            }
             Destroy(gameObject);
         }
+
       
     }
 
