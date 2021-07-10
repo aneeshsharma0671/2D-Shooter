@@ -96,9 +96,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 2
-  playerlayer:
-    serializedVersion: 2
-    m_Bits: 0
+  projectileDamage: 10
 --- !u!1 &6717184300771511540
 GameObject:
   m_ObjectHideFlags: 0

@@ -23,7 +23,7 @@ public class AudioManager : MonoBehaviour
 	public AudioClip orbStingClip;      //The sting played when an orb is collected
 	public AudioClip doorOpenStingClip; //The sting played when the door opens
 
-	[Header("Robbie Audio")]
+	[Header("Player Audio")]
     public AudioClip[] walkStepClips;	//The footstep sound effects
 	public AudioClip[] crouchStepClips;	//The crouching footstep sound effects
 	public AudioClip deathClip;			//The player death sound effect
