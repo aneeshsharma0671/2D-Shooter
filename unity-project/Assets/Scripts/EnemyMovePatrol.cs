@@ -7,6 +7,8 @@ public class EnemyMovePatrol : EnemyMovementBehaviour
     public LayerMask layer;
     public Vector3 checkoffset;
     private bool facingRight = true;
+    public float GroundInfoCheck = 4;
+    public float WallInfoCheck = 4;
 
     public override void NormalMovement()
     {
@@ -32,11 +34,11 @@ public class EnemyMovePatrol : EnemyMovementBehaviour
     bool ShouldFlip()
     {
         Vector3 checkpos = rbToUse.position;
-        RaycastHit2D groundinfo = Physics2D.Raycast(checkpos + rbToUse.transform.right + checkoffset, -rbToUse.transform.up, 2, layer);
-        Debug.DrawRay(checkpos + rbToUse.transform.right + checkoffset, -rbToUse.transform.up * 2,Color.blue);
+        RaycastHit2D groundinfo = Physics2D.Raycast(checkpos + rbToUse.transform.right + checkoffset, -rbToUse.transform.up, GroundInfoCheck, layer);
+        Debug.DrawRay(checkpos + rbToUse.transform.right + checkoffset, -rbToUse.transform.up * GroundInfoCheck,Color.blue);
 
-        RaycastHit2D wallInfo = Physics2D.Raycast(checkpos, rbToUse.transform.right, 4, layer);
-        Debug.DrawRay(checkpos, rbToUse.transform.right * 4, Color.blue);
+        RaycastHit2D wallInfo = Physics2D.Raycast(checkpos, rbToUse.transform.right, WallInfoCheck, layer);
+        Debug.DrawRay(checkpos, rbToUse.transform.right * WallInfoCheck, Color.blue);
 
         if (!groundinfo || wallInfo)
             return true;

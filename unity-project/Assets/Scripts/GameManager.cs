@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class GameManager : MonoBehaviour
 
 	List<Key> keys;
 	Door door;
+	CameraUITransition cameraTransition;
+	public bool isGameOver;
 
 
 	void Awake()
@@ -53,6 +56,43 @@ public class GameManager : MonoBehaviour
 		//Record the door reference
 		current.door = door;
 	}
+
+	public static void RegisterCameraTransition(CameraUITransition fader)
+	{
+		//If there is no current Game Manager, exit
+		if (current == null)
+			return;
+
+		//Record the scene fader reference
+		current.cameraTransition = fader;
+	}
+
+	public static void PlayerWon()
+	{
+		//If there is no current Game Manager, exit
+		if (current == null)
+			return;
+
+		//The game is now over
+		current.isGameOver = true;
+		GameInfo.MenuUIstate = menuState.level;
+		SceneManager.LoadScene(0);
+		//Tell UI Manager to show the game over text and tell the Audio Manager to play
+		//game over audio
+	//	UIManager.DisplayGameOverText();
+	//	AudioManager.PlayWonAudio();
+	}
+
+	public static void PlayerDied()
+    {
+		SceneManager.LoadScene(1);
+		current.keys.Clear();
+    }
+
+	public static void PlayCameraTranstion()
+    {
+		current.cameraTransition.FadeSceneOut();
+    }
 
 	public static void PlayerGrabbedKey(Key key)
     {

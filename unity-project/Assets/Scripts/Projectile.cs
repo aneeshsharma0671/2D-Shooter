@@ -8,6 +8,7 @@ public class Projectile : MonoBehaviour
     public float lifetime;
     public int projectileDamage;
     private Rigidbody2D rb;
+    public GameObject hitEffectGFX;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -18,6 +19,8 @@ public class Projectile : MonoBehaviour
             {
                 collision.gameObject.GetComponentInParent<EnemyLifeBehaviour>().TakeDamage(projectileDamage);
             }
+            GameObject hitGFX = Instantiate(hitEffectGFX, gameObject.transform.position, gameObject.transform.rotation);
+            Destroy(hitGFX, 0.5f);
             Destroy(gameObject);
         }
 

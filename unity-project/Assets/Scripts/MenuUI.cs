@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
+public enum menuState
+{
+    main,
+    level,
+    weapon
+}
 public class MenuUI : MonoBehaviour
 {
     public GameObject mainMenuPanel;
@@ -12,9 +18,38 @@ public class MenuUI : MonoBehaviour
 
     UIManager uiManager;
 
+    Vector3 uiActivePos = new Vector3(0,0,0);
+    Vector3 uiDeactivepositive = new Vector3(2000,0,0);
+    Vector3 uiDeactiveNegative = new Vector3(-2000, 0, 0);
+
     private void Start()
     {
         uiManager = FindObjectOfType<UIManager>();
+        setMenuState(GameInfo.MenuUIstate);
+    }
+    
+    public void setMenuState(menuState state)
+    {
+        switch (state)
+        {
+            case menuState.main:
+                mainMenuPanel.GetComponent<RectTransform>().anchoredPosition = uiActivePos;
+                levelSelectPanel.GetComponent<RectTransform>().anchoredPosition = uiDeactivepositive;
+                weaponSelectPanel.GetComponent<RectTransform>().anchoredPosition = uiDeactivepositive;
+                break;
+            case menuState.level:
+                mainMenuPanel.GetComponent<RectTransform>().anchoredPosition = uiDeactiveNegative;
+                levelSelectPanel.GetComponent<RectTransform>().anchoredPosition = uiActivePos;
+                weaponSelectPanel.GetComponent<RectTransform>().anchoredPosition = uiDeactivepositive;
+                break;
+            case menuState.weapon:
+                mainMenuPanel.GetComponent<RectTransform>().anchoredPosition = uiDeactiveNegative;
+                levelSelectPanel.GetComponent<RectTransform>().anchoredPosition = uiDeactiveNegative;
+                weaponSelectPanel.GetComponent<RectTransform>().anchoredPosition = uiActivePos;
+                break;
+            default:
+                break;
+        }
     }
 
     public void onPlay()
@@ -29,6 +64,7 @@ public class MenuUI : MonoBehaviour
     public void onlevelSelect(int levelNo)
     {
         uiManager.leanTweenMenuPanel(levelSelectPanel, weaponSelectPanel, -1, 1 / transitionSpeed);
+        gameObject.GetComponentInChildren<WeaponSelectUI>().setWeaponImage();
         GameInfo.levelindex = levelNo;
     }
 

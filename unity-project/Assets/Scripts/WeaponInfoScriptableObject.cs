@@ -14,6 +14,7 @@ public enum weaponTypes
 public class weapondata
 {
     public GameObject weaponPrefab;
+    public Sprite weaponSprite;
     public GameObject bulletPrefab;
     public weaponTypes weaponType;
 }

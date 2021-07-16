@@ -10,6 +10,7 @@ public class EnemyLifeBehaviour : MonoBehaviour
     public GameObject CorpseOBJ;
     public GameObject DeathEffect;
     public GameObject HitEffect;
+    public int touchDamage;
 
     GameObject key;
 

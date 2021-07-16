@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/UI.unity
     guid: c7e62d75b3e01fe4a954f6c5ff4a6331
   - enabled: 1
-    path: Assets/Scenes/Enemy AI.unity
-    guid: abdc6f9ba7d12184cb281dcb34981126
+    path: Assets/Scenes/Level1.unity
+    guid: f74e051435bff0946aab00478e8c781f
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 9b97b31b1a55ab241aa44a4117d6c87c, type: 2}
