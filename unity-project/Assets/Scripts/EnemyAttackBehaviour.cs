@@ -22,7 +22,7 @@ public class EnemyAttackBehaviour : MonoBehaviour
     EnemyAttack AttackToUse()
     {
         List<EnemyAttack> availableAttack = new List<EnemyAttack>();
-
+        
         foreach (EnemyAttack item in attacks)
         {
             if(item.CanDoTheAttack(player.position))

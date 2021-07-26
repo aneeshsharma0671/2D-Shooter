@@ -16,6 +16,7 @@ public class weapondata
     public GameObject weaponPrefab;
     public Sprite weaponSprite;
     public GameObject bulletPrefab;
+    public AudioClip shootAudio;
     public weaponTypes weaponType;
 }
 

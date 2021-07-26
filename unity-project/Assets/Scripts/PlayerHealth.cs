@@ -64,7 +64,7 @@ public class PlayerHealth : MonoBehaviour
     {
 		if (collision.gameObject.layer != enemyLayer || !isAlive)
 			return;
-
 		TakeDamage(collision.gameObject.GetComponentInParent<EnemyLifeBehaviour>().touchDamage);
+		gameObject.GetComponent<PlayerMovement>().knockBackEffect(collision.transform.position);
 	}
 }

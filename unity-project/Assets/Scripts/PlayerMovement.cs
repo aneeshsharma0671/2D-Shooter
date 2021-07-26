@@ -17,7 +17,14 @@ public class PlayerMovement : MonoBehaviour
 	public float crouchJumpBoost = 2.5f;	//Jump boost when crouching
 	public float hangingJumpForce = 15f;	//Force of wall hanging jumo
 	public float jumpHoldForce = 1.9f;		//Incremental force when jump is held
-	public float jumpHoldDuration = .1f;	//How long the jump key can be held
+	public float jumpHoldDuration = .1f;    //How long the jump key can be held
+	public ParticleSystem jumpDust;
+
+	[Header("Knockback Preperties")]
+	public float knockBackForce;
+	public float knockBackLength;
+	public float knockBackCount;
+	public bool knockFromRight;
 
 	[Header("Environment Check Properties")]
 	public float footOffset = .4f;          //X Offset of feet raycast
@@ -172,7 +179,20 @@ public class PlayerMovement : MonoBehaviour
 			xVelocity /= crouchSpeedDivisor;
 
 		//Apply the desired velocity 
-		rigidBody.velocity = new Vector2(xVelocity, rigidBody.velocity.y);
+		if(knockBackCount <= 0)
+        {
+			rigidBody.velocity = new Vector2(xVelocity, rigidBody.velocity.y);
+        }
+		else 
+        {
+			if (knockFromRight)
+				rigidBody.velocity = new Vector2(-knockBackForce, knockBackForce);
+			else
+				rigidBody.velocity = new Vector2(knockBackForce, knockBackForce);
+
+			knockBackCount -= Time.deltaTime;
+        }
+		
 
 		//If the player is on the ground, extend the coyote time window
 		if (isOnGround)
@@ -233,7 +253,7 @@ public class PlayerMovement : MonoBehaviour
 
 			//...add the jump force to the rigidbody...
 			rigidBody.AddForce(new Vector2(0f, jumpForce), ForceMode2D.Impulse);
-
+			createDust();
 			//...and tell the Audio Manager to play the jump audio
 			AudioManager.PlayJumpAudio();
 		}
@@ -327,5 +347,23 @@ public class PlayerMovement : MonoBehaviour
 		return hit;
 	}
 
+	public void knockBackEffect(Vector3 pos)
+    {
+		if((pos.x -rigidBody.position.x) > 0 )
+        {
+			knockFromRight = true;
+        }
+		else
+        {
+			knockFromRight = false;
+        }
+
+		knockBackCount = knockBackLength;
+	}
+
+	void createDust()
+    {
+		jumpDust.Play();
+    }
 
 }

@@ -16,12 +16,15 @@ MonoBehaviour:
   - weaponPrefab: {fileID: 5826753587899962850, guid: 2a72d9e5adc920b42a39917d1d5af445, type: 3}
     weaponSprite: {fileID: 21300000, guid: 06c1561b4c7977c4388e1066593251e0, type: 3}
     bulletPrefab: {fileID: 6717184299867110445, guid: 1837112c542ca2342a64f97bb6f6e57c, type: 3}
+    shootAudio: {fileID: 8300000, guid: f7ccf3b0cf0dac84ba76745a1e6564da, type: 3}
     weaponType: 0
   - weaponPrefab: {fileID: 5826753587899962850, guid: 3d500b217b1d51149a58cc95dacebe96, type: 3}
     weaponSprite: {fileID: -7266264384408903872, guid: 8789f3fe2285873429a24db4fa7bb3d5, type: 3}
     bulletPrefab: {fileID: 6717184299867110445, guid: bfd920759d5752048936f08ac94f40f4, type: 3}
+    shootAudio: {fileID: 8300000, guid: f7ccf3b0cf0dac84ba76745a1e6564da, type: 3}
     weaponType: 0
   - weaponPrefab: {fileID: 5826753587899962850, guid: 1c8e3f0dcf6a3db4c8518ac046147c4a, type: 3}
     weaponSprite: {fileID: -5459188077937056252, guid: 5bd39e9152616924a9dace74a8a207ce, type: 3}
     bulletPrefab: {fileID: 6717184299867110445, guid: c3bf35f8e764cf648afc788be0399cc9, type: 3}
+    shootAudio: {fileID: 8300000, guid: f7ccf3b0cf0dac84ba76745a1e6564da, type: 3}
     weaponType: 2

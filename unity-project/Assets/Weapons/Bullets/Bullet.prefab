@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84cfe6c9c36a10745ad1dfcb445eccdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 7
+  speed: 20
   lifetime: 2
   projectileDamage: 10
   hitEffectGFX: {fileID: 4891627155756344919, guid: 2c321ae91732da24597706534c4e08b4, type: 3}

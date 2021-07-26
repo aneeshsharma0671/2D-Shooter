@@ -136,16 +136,43 @@ public class PlayerInput : MonoBehaviour
 		}
 		if (context.performed)
         {
-				horizontalInputRaw = context.ReadValue<Vector2>().x;
+			if (context.ReadValue<Vector2>().x >= 0)
+			{
+				horizontalInputRaw = Mathf.CeilToInt(context.ReadValue<Vector2>().x);
+			}
+			else
+            {
+				horizontalInputRaw = -1;
+            }
 				//Debug.Log(horizontalInputRaw);
 		}
 		if (context.canceled)
 		{
 			movebuttonspressed = false;
 		}
+
+		// manage jump
+		if (context.started && context.ReadValue<Vector2>().y > 0.3)
+		{
+			jumpbuttonPressed = true;
+		}
+		if (context.performed && context.ReadValue<Vector2>().y > 0.3)
+		{
+			jumpbuttonPressed = true;
+		}
+		if (context.canceled)
+		{
+			jumpbuttonPressed = false;
+			jumpbuttonHeld = false;
+		}
+		else
+		{
+			jumpbuttonHeld = true;
+		}
+
 	}
 
-	public void JumpInput(InputAction.CallbackContext context)
+/*	public void JumpInput(InputAction.CallbackContext context)
 	{
 		if (context.started)
 		{
@@ -165,7 +192,7 @@ public class PlayerInput : MonoBehaviour
 			jumpbuttonHeld = true;
         }
 	}
-
+*/
 	public void CrouchInput(InputAction.CallbackContext context)
 	{
 		if (context.started)

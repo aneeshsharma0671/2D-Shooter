@@ -34,6 +34,7 @@ public class AudioManager : MonoBehaviour
 	public AudioClip orbVoiceClip;		//The player orb collection voice
 	public AudioClip winVoiceClip;		//The player wins voice
 
+
 	[Header("Mixer Groups")]
 	public AudioMixerGroup ambientGroup;//The ambient mixer group
 	public AudioMixerGroup musicGroup;  //The music mixer group
@@ -46,6 +47,7 @@ public class AudioManager : MonoBehaviour
 	AudioSource stingSource;            //Reference to the generated sting Audio Source
 	AudioSource playerSource;           //Reference to the generated player Audio Source
 	AudioSource voiceSource;            //Reference to the generated voice Audio Source
+	AudioSource gunSource;
 
 
 	void Awake()
@@ -68,6 +70,7 @@ public class AudioManager : MonoBehaviour
         stingSource		= gameObject.AddComponent<AudioSource>() as AudioSource;
         playerSource	= gameObject.AddComponent<AudioSource>() as AudioSource;
         voiceSource		= gameObject.AddComponent<AudioSource>() as AudioSource;
+		gunSource = gameObject.AddComponent<AudioSource>() as AudioSource;
 
 		//Assign each audio source to its respective mixer group so that it is
 		//routed and controlled by the audio mixer
@@ -215,5 +218,11 @@ public class AudioManager : MonoBehaviour
 		//Set the player won sting clip and tell the source to play
 		current.stingSource.clip = current.winStingClip;
         current.stingSource.Play();
+    }
+
+	public static void PlayShootAudio(AudioClip shootaudio)
+    {
+		current.gunSource.clip = shootaudio;
+		current.gunSource.Play();
     }
 }

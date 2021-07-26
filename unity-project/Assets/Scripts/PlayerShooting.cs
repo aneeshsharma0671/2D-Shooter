@@ -42,7 +42,7 @@ public class PlayerShooting : MonoBehaviour
         {
             shoot_point = weapon_slot.GetComponentInChildren<Weapon>().shoot_point;
         }
-        shoot(weaponInfo.weapons[GameInfo.weaponindex].bulletPrefab, shoot_point.position, bullet_rotation, weaponInfo.weapons[GameInfo.weaponindex].weaponType);
+        shoot(weaponInfo.weapons[GameInfo.weaponindex].bulletPrefab, shoot_point.position, bullet_rotation, weaponInfo.weapons[GameInfo.weaponindex].weaponType , weaponInfo.weapons[GameInfo.weaponindex].shootAudio);
     }
 
     void setHeadRotation()
@@ -100,13 +100,14 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    void shoot(GameObject bullet_prefab,Vector3 position , Quaternion rotation ,weaponTypes weapondata)
+    void shoot(GameObject bullet_prefab,Vector3 position , Quaternion rotation ,weaponTypes weapondata , AudioClip audio)
     {
         if (timeBtwShoots <= 0)
         {
            // Debug.Log("time");
             if (input.firePressed)
             {
+                AudioManager.PlayShootAudio(audio);
                 //  Debug.Log("fire");
                 switch (weapondata)
                 {

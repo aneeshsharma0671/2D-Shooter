@@ -14,8 +14,8 @@ public class EnemyAttackShoot : EnemyAttack
         float angle = Mathf.Atan2(diff.y, diff.x);
         newRot = Quaternion.Euler(0f, 0f, angle * Mathf.Rad2Deg);
 
-        Debug.Log("Attack");
-       // Instantiate(projectile, shoot_Point.position, newRot);
+       // Debug.Log("Attack");
+        Instantiate(projectile, shoot_Point.position, newRot);
 
         base.DoTheAttack(player);
     }

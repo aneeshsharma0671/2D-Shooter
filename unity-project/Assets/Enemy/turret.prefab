@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &959229731388063382
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5651428015155402233}
+  m_Layer: 13
+  m_Name: ShootPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5651428015155402233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 959229731388063382}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.02, y: -0.69, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6371789860191236480}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3531262950616946755
 GameObject:
   m_ObjectHideFlags: 0
@@ -27,7 +57,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 5651428015155402233}
   m_Father: {fileID: 4305934775726036727}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,15 +79,15 @@ MonoBehaviour:
   attackDuration: 1
   readyToAttack: 1
   animtrigger: BasicAttack
-  hasAnim: 1
-  attackRangeMax: 3.65
+  hasAnim: 0
+  attackRangeMax: 6.97
   attackRangeMin: 0
   alwaysInRange: 0
   startWithCD: 0
   showGizmos: 1
   testingColor: {r: 0.10588234, g: 0.90588236, b: 0.18212155, a: 1}
-  projectile: {fileID: 0}
-  shoot_Point: {fileID: 0}
+  projectile: {fileID: 6717184299867110445, guid: c3bf35f8e764cf648afc788be0399cc9, type: 3}
+  shoot_Point: {fileID: 5651428015155402233}
 --- !u!1 &4305934774428561857
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,7 +160,7 @@ SpriteRenderer:
   m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a7f0b88040d953248a1bac23851165c7, type: 3}
-  m_Color: {r: 0.23734671, g: 0.17254901, b: 1, a: 1}
+  m_Color: {r: 1, g: 0, b: 0.039114475, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -244,7 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackContainer: {fileID: 0}
-  attacks: []
+  attacks:
+  - {fileID: 6744671977539137501}
 --- !u!1 &4305934774794947538
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,12 +368,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a873f80da780254cb1755ecfb341221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyName: Crawler
+  EnemyName: Turret
   Health: 30
   hasKey: 1
   CorpseOBJ: {fileID: 0}
   DeathEffect: {fileID: 0}
   HitEffect: {fileID: 0}
+  touchDamage: 0
 --- !u!1 &4305934775696579259
 GameObject:
   m_ObjectHideFlags: 0

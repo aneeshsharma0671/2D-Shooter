@@ -128,6 +128,20 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
+                    "m_Id": "c1605dacdafd4cde94590febd80f5ae2"
+                },
+                "m_SlotId": 7
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "583d4967acac4ff9ac3aeca343157b62"
+                },
+                "m_SlotId": 0
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
                     "m_Id": "f49cc0eb39424ecd85ec69a83d71ef9a"
                 },
                 "m_SlotId": 0
@@ -327,10 +341,10 @@
     "m_GeneratePropertyBlock": true,
     "m_Precision": 0,
     "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
+    "hlslDeclarationOverride": 2,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"7910903762a593a46bda9e40ce302257\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"5fa6e2de950c90d49b1f9df4b7d3fdb3\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_Modifiable": true,
@@ -525,7 +539,7 @@
     "hlslDeclarationOverride": 0,
     "m_Hidden": false,
     "m_Value": {
-        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"494c5dd30a339d048b3bde12d8d2970b\",\"type\":3}}",
+        "m_SerializedTexture": "{\"texture\":{\"fileID\":2800000,\"guid\":\"7dc263c2b2967b049a04877289d729e0\",\"type\":3}}",
         "m_Guid": ""
     },
     "m_Modifiable": true,
