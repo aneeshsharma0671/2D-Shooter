@@ -12,8 +12,9 @@ public class HandAnimation : MonoBehaviour
     public Transform handPosHanging;
     public Transform lefthandPos;
     public Transform rightHandPos;
-    private Transform leftgunpos;
+    public Transform leftgunpos;
     private Transform rightgunpos;
+    public Transform crosshair;
 
     // Start is called before the first frame update
     void Start()

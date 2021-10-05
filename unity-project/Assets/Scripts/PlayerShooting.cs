@@ -8,6 +8,11 @@ public class PlayerShooting : MonoBehaviour
     public float zmin = -90f;
     public float zmax = 90f;
 
+    public GameObject crosshair;
+    public float crosshairDistance ;
+    public GameObject playerCenter;
+    Vector2 mousePos = new Vector2(1, 0);
+
     public GameObject headBone;
     public float headClamp;
     public float gunClamp;
@@ -33,8 +38,10 @@ public class PlayerShooting : MonoBehaviour
 
     void Update()
     {
+        
         setrotation();
-        //if (-headClamp <= weapon_slot.rotation.z && weapon_slot.rotation.z <= headClamp)
+        setAim();
+        if (-headClamp <= weapon_slot.rotation.z && weapon_slot.rotation.z <= headClamp)
         setHeadRotation();
        
             
@@ -43,7 +50,29 @@ public class PlayerShooting : MonoBehaviour
             shoot_point = weapon_slot.GetComponentInChildren<Weapon>().shoot_point;
         }
         shoot(weaponInfo.weapons[GameInfo.weaponindex].bulletPrefab, shoot_point.position, bullet_rotation, weaponInfo.weapons[GameInfo.weaponindex].weaponType , weaponInfo.weapons[GameInfo.weaponindex].shootAudio);
+    
     }
+
+    void setAim()
+    {
+        if(input.mousePosition.magnitude != 0)
+        {
+            if(player.direction == 1)
+            {
+                mousePos = input.mousePosition;
+            }
+            else
+            {
+                mousePos = new Vector2(-input.mousePosition.x,input.mousePosition.y);
+            }
+        }
+        float angle = Mathf.Atan2(mousePos.y,mousePos.x);
+        crosshair.transform.localPosition = new Vector3(Mathf.Cos(angle)*crosshairDistance,Mathf.Sin(angle)*crosshairDistance+ playerCenter.transform.localPosition.y,0);
+    }
+
+
+
+    
 
     void setHeadRotation()
     {

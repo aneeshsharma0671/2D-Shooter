@@ -144,7 +144,6 @@ public class PlayerInput : MonoBehaviour
             {
 				horizontalInputRaw = -1;
             }
-				//Debug.Log(horizontalInputRaw);
 		}
 		if (context.canceled)
 		{
@@ -236,8 +235,7 @@ public class PlayerInput : MonoBehaviour
     {
 		// for mouse controls add logic here
 		mousePosition = context.ReadValue<Vector2>();
-
-		Debug.Log(mousePosition.magnitude);
+		//Debug.Log(mousePosition);
 
 		if (context.started && mousePosition.magnitude >= horizontalDpadthreshold)
 		{
